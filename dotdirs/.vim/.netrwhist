@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/yms/.zprezto'
+let g:netrw_dirhist_2='/Applications/MacVim.app/Contents/bin'
+let g:netrw_dirhist_3='/Applications/MacVim.app/Contents'
+let g:netrw_dirhist_4='/Applications/MacVim.app/Contents/MacOS'
+let g:netrw_dirhist_5='/Applications/MacVim.app/Contents/bin'
+let g:netrw_dirhist_6='/Users/yms'
