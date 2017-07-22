@@ -43,6 +43,8 @@ call dein#add('kshenoy/vim-signature')
 call dein#add('jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}})
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('rking/ag.vim')
+call dein#add('mxw/vim-jsx')
+call dein#add('moll/vim-node')
 
 call dein#end()
 

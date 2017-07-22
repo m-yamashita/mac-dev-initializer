@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e "\n===== [$(readlink -f $0)] =====\n" 1>&2
+echo -e "\n===== [$(greadlink -f $0)] =====\n" 1>&2
 set -vxeu
 
 ################################################################################
@@ -38,7 +38,7 @@ set -vxeu
 ########################################
 # nodebrew install
 ########################################
-readonly MY_DIR=$(readlink -f $(dirname $0))
+readonly MY_DIR=$(greadlink -f $(dirname $0))
 readonly WORKING_DIR=$(mktemp -d)
 trap "rm -rf ${WORKING_DIR}" 0
 cd $WORKING_DIR

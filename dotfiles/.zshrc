@@ -17,7 +17,7 @@ export HISTSIZE=10000
 export HISTIGNORE=history:l:which
 setopt HIST_IGNORE_SPACE
 SAVEHIST=10000
-# HISTFILE=~/.zsh_history
+HISTFILE=~/.zsh_history
 
 # Use modern completion system
 autoload -Uz compinit
@@ -80,11 +80,18 @@ if [ -d ${HOME}/.rbenv  ] ; then
   eval "$(rbenv init -)"
 fi
 
-# nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH 
+# ~/bin
+export PATH=$HOME/bin:$PATH 
 
 # MacVim-KaoriYa
 export PATH=/Applications/MacVim.app/Contents/bin:$PATH
+
+# MacVim-KaoriYa
+export PATH=/Applications/MacVim.app/Contents/bin:$PATH
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH 
+
 # =========================== VCS
 # VCSの情報を取得するzshの便利関数 vcs_infoを使う
 autoload -Uz vcs_info
@@ -100,12 +107,16 @@ precmd () {
 }
 # バージョン管理されているディレクトリにいれば表示，そうでなければ非表示
 # 直前のコマンドの終了ステータスをプロンプト右に表示。
-#RPROMPT="%1(v|%F{green}%1v%f|)"
+# RPROMPT="%1(v|%F{green}%1v%f|)"
 autoload -U colors
 colors
 setopt promptsubst
-RPROMPT="%{$fg[black]%(?.$bg[green].$bg[red])%}<%?>%{$reset_color%} %1(v|%F{green}%1v%f|)"
+PROMPT="%~ %% "
+RPROMPT="%* - %{$fg[black]%(?.$bg[green].$bg[red])%}<%?>%{$reset_color%} %1(v|%F{green}%1v%f|)"
 
 # 環境依存設定の読み込み
 source ~/.zshrc_local
+
+# tmux自動起動
+[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 

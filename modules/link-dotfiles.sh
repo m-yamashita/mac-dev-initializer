@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e "\n===== [$(readlink -f $0)] =====\n" 1>&2
+echo -e "\n===== [$(greadlink -f $0)] =====\n" 1>&2
 set -vxeu
 
 ################################################################################
@@ -37,7 +37,7 @@ set -vxeu
 ########################################
 # シンボリックリンク生成
 ########################################
-readonly MY_DIR=$(readlink -f $(dirname $0))
+readonly MY_DIR=$(greadlink -f $(dirname $0))
 cd ${MY_DIR}
 
 pwd
@@ -48,7 +48,7 @@ for path in ${file_paths}; do
   # リンクもしくはファイルが存在する場合は削除
   [ -e ${home_file} ] && rm -f ${home_file}
   # シンボリックリンクを作成
-  ln -s $(readlink -f ${path}) ~/
+  ln -s $(greadlink -f ${path}) ~/
 done
 
 # .*rc_local ファイルを作成

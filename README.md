@@ -23,16 +23,13 @@
 
 ## 基本設定
 
-SolydXの基本設定。
-基本的にスタートメニューから設定を探して行えるはず。
+TODO
 
-- SolydXの基本設定キーボード設定を変更
-    - リピートするまでの時間: 250
-    - リピート速度: 50
+Macの基本設定。
+
 
 マウスの設定を変更
 
-加速: 4.0
 
 ## (VirtualBoxで動いている場合)共有フォルダ設定
 
@@ -75,21 +72,7 @@ sudo gpasswd -a $(whoami) vboxsf
 
 ### (Optional) GoogleChrome等各種ブラウザのインストール
 
-プリインストールされているFirefox等から普通に検索してインストールすれば良い
+普通に検索してインストール
 
-### (Optional) Autokey & Quickey.py インストール
-
-ショートカットキー設定の為のAutokey+Quickey.pyをインストールする。
-
-```bash
-wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/autokey/autokey-0.90.4.tar.gz
-tar xvf autokey-0.90.4.tar.gz
-cd autokey-0.90.4
-sudo python setup.py install
-sudo apt-get install python-xlib python-pyinotify
-git clone https://github.com/m-yamashita/quickey.py.git
-cd quickey.py
-install.sh
-ln -s "`pwd`/Quickey" ~/.config/autokey/data/
-```
+### Automator 設定
 

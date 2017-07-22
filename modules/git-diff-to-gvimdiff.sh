@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e "\n===== [$(readlink -f $0)] =====\n" 1>&2
+echo -e "\n===== [$(greadlink -f $0)] =====\n" 1>&2
 set -vxeu
 
 ################################################################################
@@ -38,7 +38,7 @@ set -vxeu
 ########################################
 # `git diff` を `gvimdiff` に置き換え
 ########################################
-readonly MY_DIR=$(readlink -f $(dirname $0))
+readonly MY_DIR=$(greadlink -f $(dirname $0))
 cd ${MY_DIR}
 
 # gitの設定を変更し、diffの際にラッパースクリプトを利用するように。
