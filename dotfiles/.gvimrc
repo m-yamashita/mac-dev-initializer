@@ -4,7 +4,7 @@
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 25-Apr-2017.
+" Last Change: 06-Sep-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -92,7 +92,7 @@ set guifont=Osaka-Mono:h14
 " ウインドウの幅
 set columns=236
 " ウインドウの高さ
-set lines=54
+set lines=64
 " コマンドラインの高さ(GUI使用時)
 set cmdheight=1
 " 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
@@ -226,4 +226,3 @@ hi CursorLine guibg=#444444
 
 " IM自動切り替え
 set noimdisableactivate
-set imdisable

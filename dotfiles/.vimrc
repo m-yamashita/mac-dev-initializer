@@ -24,7 +24,6 @@ call dein#add('honza/vim-snippets')
 call dein#add('Shougo/neomru.vim')
 call dein#add('KamunagiChiduru/vim-edit-properties')
 call dein#add('szw/vim-tags')
-call dein#add('scrooloose/syntastic')
 call dein#add('tpope/vim-rails')
 call dein#add('elzr/vim-json')
 call dein#add('kchmck/vim-coffee-script')
@@ -37,10 +36,11 @@ call dein#add('ekalinin/Dockerfile.vim')
 call dein#add('kannokanno/previm')
 call dein#add('timcharper/textile.vim')
 call dein#add('vim-scripts/fcitx.vim')
-call dein#add( 'lambdalisue/vim-unified-diff')
+call dein#add('lambdalisue/vim-unified-diff')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('kshenoy/vim-signature')
 call dein#add('jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}})
+call dein#add('w0rp/ale')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('rking/ag.vim')
 call dein#add('mxw/vim-jsx')
@@ -49,7 +49,8 @@ call dein#add('moll/vim-node')
 call dein#end()
 
 filetype plugin indent on
-syntax enable"
+syntax enable
+
 " end dein.vim ------------------------------------
 
 " ctrlp.vim remapping
@@ -91,7 +92,7 @@ filetype indent on
 filetype plugin on
 colorscheme desert256
 
-let g:previm_open_cmd = 'vivaldi'
+let g:previm_open_cmd = 'open -a "/Applications/Google Chrome.app"'
 
 " vim-table-mode
 let g:table_mode_corner = "|"
@@ -121,13 +122,6 @@ if has('conceal')
 
 " Snippet directory
 let g:neosnippet#snippets_directory = "~/.vim/.bundle/neosnippet-snippets, ~/.vim/original-snippet, ~/.vim/bundle/vim-snippets"
-
-" syntastic
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_enable_javascript_checker = 1
-let g:syntastic_javascript_checkers = ['eslint']
 
 " vimshell
 let g:vimshell_prompt = $USER."@vimshell: "
@@ -275,14 +269,6 @@ set nf=""
 " カーソル行のハイライト
 set cursorline
 
-" jslint.vim
-"function! s:javascript_filetype_settings()
-"  autocmd BufLeave     <buffer> call jslint#clear()
-"  autocmd BufWritePost <buffer> call jslint#check()
-"  autocmd CursorMoved  <buffer> call jslint#message()
-"endfunction
-"autocmd FileType javascript call s:javascript_filetype_settings()
-
 set fenc=utf-8
 set enc=utf-8
 set fencs=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,cp20932
@@ -298,6 +284,9 @@ set backspace=2
 set hlsearch
 set ambiwidth=double
 
+" 厳密マッチ
+set noignorecase
+
 if exists('&colorcolumn')
   set colorcolumn=+1
   autocmd FileType * setlocal textwidth=80
@@ -307,7 +296,7 @@ endif
 highlight ColorColumn ctermbg=52
 
 " カレントディレクトリに自動移動
-" set autochdir
+set autochdir
 
 " スワップディレクトリ設定
 set directory=~/.vim/swap
@@ -317,6 +306,9 @@ set hidden
 set grepprg=grep\ -nHR\ --exclude-dir=.svn
 " 左右分割時にデフォルトを右にする
 set splitright
+
+" undofileの保存先
+set undodir=~/.vim/undo
 
 " TagList
 " set tags=tags
@@ -335,6 +327,13 @@ hi PmenuSbar ctermbg=255 ctermfg=0 guifg=#000000 guibg=#FFFFFF
 
 " %によるペアリングの拡張
 source $VIMRUNTIME/macros/matchit.vim
+
+" 「日本語入力固定モード」のMacVimKaoriya対策を無効化
+let IM_CtrlMacVimKaoriya = 0
+" 「日本語入力固定モード」の動作モード
+let IM_CtrlMode = 4
+" 「日本語入力固定モード」切替キー
+inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 
 " ===== Unite.vim =====
 " history/yankの有効化
@@ -410,6 +409,30 @@ augroup Jenkinsfile
   autocmd BufNewFile,BufRead *.{js,es6} set sw=2
   autocmd BufNewFile,BufRead *.{js,es6} set tabstop=2
   autocmd BufNewFile,BufRead *.{js,es6} set softtabstop=2
+augroup END
+
+augroup yml
+  autocmd!
+  " ymlをyamlとして読む
+  autocmd BufNewFile,BufRead *.{yml,yaml} set filetype=yaml
+  " インデント幅の調整
+  autocmd BufNewFile,BufRead *.{yml,yaml} set sw=2
+  autocmd BufNewFile,BufRead *.{yml,yaml} set tabstop=2
+  autocmd BufNewFile,BufRead *.{yml,yaml} set softtabstop=2
+augroup END
+
+augroup sh
+  autocmd!
+  " インデント幅の調整
+  autocmd BufNewFile,BufRead *.{sh} set sw=2
+  autocmd BufNewFile,BufRead *.{sh} set tabstop=2
+  autocmd BufNewFile,BufRead *.{sh} set softtabstop=2
+augroup END
+
+augroup ebextensions_cmd
+  autocmd!
+  " .ebextensions/*.configをYAMLとして読む
+  autocmd BufNewFile,BufRead */.ebextensions/*.config set filetype=yaml
 augroup END
 
 " vim-railsでServiceを移動対象に含める

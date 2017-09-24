@@ -111,7 +111,7 @@ precmd () {
 autoload -U colors
 colors
 setopt promptsubst
-PROMPT="%~ %% "
+PROMPT=$'[%~] \n%% '
 RPROMPT="%* - %{$fg[black]%(?.$bg[green].$bg[red])%}<%?>%{$reset_color%} %1(v|%F{green}%1v%f|)"
 
 # 環境依存設定の読み込み
@@ -120,3 +120,8 @@ source ~/.zshrc_local
 # tmux自動起動
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
