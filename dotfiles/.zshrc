@@ -73,11 +73,16 @@ export GREP_COLORS='fn=1;36:mt=1;31:ln=1;33'
 # golang
 export GOPATH=~/go
 
-# rbenv
-if [ -d ${HOME}/.rbenv  ] ; then
-  PATH=${HOME}/.rbenv/bin:${PATH}
-  export PATH
-  eval "$(rbenv init -)"
+# ------------------------------------------------------------------------
+# anyenv
+# ------------------------------------------------------------------------
+if [ -d ${HOME}/.anyenv ] ; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+  for D in `ls $HOME/.anyenv/envs`
+  do
+      export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+  done
 fi
 
 # ~/bin
